@@ -12,13 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdsRouteImport } from './routes/ads'
 import { Route as CampaignsRouteImport } from './routes/campaigns'
+import { Route as ConnectionsRouteImport } from './routes/connections'
 import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as CopilotRouteImport } from './routes/copilot'
 import { Route as FollowUpsRouteImport } from './routes/follow-ups'
 import { Route as GoogleSeoRouteImport } from './routes/google-seo'
+import { Route as LeadCampaignsRouteImport } from './routes/lead-campaigns'
 import { Route as LeadsRouteImport } from './routes/leads'
 import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as PipelineRouteImport } from './routes/pipeline'
+import { Route as ReferralsRouteImport } from './routes/referrals'
+import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SocialRouteImport } from './routes/social'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as AccountsIndexRouteImport } from './routes/accounts.index'
@@ -39,9 +45,19 @@ const CampaignsRoute = CampaignsRouteImport.update({
   path: '/campaigns',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConnectionsRoute = ConnectionsRouteImport.update({
+  id: '/connections',
+  path: '/connections',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactsRoute = ContactsRouteImport.update({
   id: '/contacts',
   path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CopilotRoute = CopilotRouteImport.update({
+  id: '/copilot',
+  path: '/copilot',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FollowUpsRoute = FollowUpsRouteImport.update({
@@ -52,6 +68,11 @@ const FollowUpsRoute = FollowUpsRouteImport.update({
 const GoogleSeoRoute = GoogleSeoRouteImport.update({
   id: '/google-seo',
   path: '/google-seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadCampaignsRoute = LeadCampaignsRouteImport.update({
+  id: '/lead-campaigns',
+  path: '/lead-campaigns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LeadsRoute = LeadsRouteImport.update({
@@ -69,9 +90,24 @@ const PipelineRoute = PipelineRouteImport.update({
   path: '/pipeline',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReferralsRoute = ReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SocialRoute = SocialRouteImport.update({
@@ -99,13 +135,19 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ads': typeof AdsRoute
   '/campaigns': typeof CampaignsRoute
+  '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
+  '/copilot': typeof CopilotRoute
   '/follow-ups': typeof FollowUpsRoute
   '/google-seo': typeof GoogleSeoRoute
+  '/lead-campaigns': typeof LeadCampaignsRoute
   '/leads': typeof LeadsRoute
   '/meetings': typeof MeetingsRoute
   '/pipeline': typeof PipelineRoute
+  '/referrals': typeof ReferralsRoute
+  '/reports': typeof ReportsRoute
   '/services': typeof ServicesRoute
+  '/settings': typeof SettingsRoute
   '/social': typeof SocialRoute
   '/tasks': typeof TasksRoute
   '/accounts/$id': typeof AccountsIdRoute
@@ -115,13 +157,19 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ads': typeof AdsRoute
   '/campaigns': typeof CampaignsRoute
+  '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
+  '/copilot': typeof CopilotRoute
   '/follow-ups': typeof FollowUpsRoute
   '/google-seo': typeof GoogleSeoRoute
+  '/lead-campaigns': typeof LeadCampaignsRoute
   '/leads': typeof LeadsRoute
   '/meetings': typeof MeetingsRoute
   '/pipeline': typeof PipelineRoute
+  '/referrals': typeof ReferralsRoute
+  '/reports': typeof ReportsRoute
   '/services': typeof ServicesRoute
+  '/settings': typeof SettingsRoute
   '/social': typeof SocialRoute
   '/tasks': typeof TasksRoute
   '/accounts/$id': typeof AccountsIdRoute
@@ -132,13 +180,19 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ads': typeof AdsRoute
   '/campaigns': typeof CampaignsRoute
+  '/connections': typeof ConnectionsRoute
   '/contacts': typeof ContactsRoute
+  '/copilot': typeof CopilotRoute
   '/follow-ups': typeof FollowUpsRoute
   '/google-seo': typeof GoogleSeoRoute
+  '/lead-campaigns': typeof LeadCampaignsRoute
   '/leads': typeof LeadsRoute
   '/meetings': typeof MeetingsRoute
   '/pipeline': typeof PipelineRoute
+  '/referrals': typeof ReferralsRoute
+  '/reports': typeof ReportsRoute
   '/services': typeof ServicesRoute
+  '/settings': typeof SettingsRoute
   '/social': typeof SocialRoute
   '/tasks': typeof TasksRoute
   '/accounts/$id': typeof AccountsIdRoute
@@ -150,13 +204,19 @@ export interface FileRouteTypes {
     | '/'
     | '/ads'
     | '/campaigns'
+    | '/connections'
     | '/contacts'
+    | '/copilot'
     | '/follow-ups'
     | '/google-seo'
+    | '/lead-campaigns'
     | '/leads'
     | '/meetings'
     | '/pipeline'
+    | '/referrals'
+    | '/reports'
     | '/services'
+    | '/settings'
     | '/social'
     | '/tasks'
     | '/accounts/$id'
@@ -166,13 +226,19 @@ export interface FileRouteTypes {
     | '/'
     | '/ads'
     | '/campaigns'
+    | '/connections'
     | '/contacts'
+    | '/copilot'
     | '/follow-ups'
     | '/google-seo'
+    | '/lead-campaigns'
     | '/leads'
     | '/meetings'
     | '/pipeline'
+    | '/referrals'
+    | '/reports'
     | '/services'
+    | '/settings'
     | '/social'
     | '/tasks'
     | '/accounts/$id'
@@ -182,13 +248,19 @@ export interface FileRouteTypes {
     | '/'
     | '/ads'
     | '/campaigns'
+    | '/connections'
     | '/contacts'
+    | '/copilot'
     | '/follow-ups'
     | '/google-seo'
+    | '/lead-campaigns'
     | '/leads'
     | '/meetings'
     | '/pipeline'
+    | '/referrals'
+    | '/reports'
     | '/services'
+    | '/settings'
     | '/social'
     | '/tasks'
     | '/accounts/$id'
@@ -199,13 +271,19 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdsRoute: typeof AdsRoute
   CampaignsRoute: typeof CampaignsRoute
+  ConnectionsRoute: typeof ConnectionsRoute
   ContactsRoute: typeof ContactsRoute
+  CopilotRoute: typeof CopilotRoute
   FollowUpsRoute: typeof FollowUpsRoute
   GoogleSeoRoute: typeof GoogleSeoRoute
+  LeadCampaignsRoute: typeof LeadCampaignsRoute
   LeadsRoute: typeof LeadsRoute
   MeetingsRoute: typeof MeetingsRoute
   PipelineRoute: typeof PipelineRoute
+  ReferralsRoute: typeof ReferralsRoute
+  ReportsRoute: typeof ReportsRoute
   ServicesRoute: typeof ServicesRoute
+  SettingsRoute: typeof SettingsRoute
   SocialRoute: typeof SocialRoute
   TasksRoute: typeof TasksRoute
   AccountsIdRoute: typeof AccountsIdRoute
@@ -235,11 +313,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampaignsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/connections': {
+      id: '/connections'
+      path: '/connections'
+      fullPath: '/connections'
+      preLoaderRoute: typeof ConnectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contacts': {
       id: '/contacts'
       path: '/contacts'
       fullPath: '/contacts'
       preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/copilot': {
+      id: '/copilot'
+      path: '/copilot'
+      fullPath: '/copilot'
+      preLoaderRoute: typeof CopilotRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/follow-ups': {
@@ -254,6 +346,13 @@ declare module '@tanstack/react-router' {
       path: '/google-seo'
       fullPath: '/google-seo'
       preLoaderRoute: typeof GoogleSeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lead-campaigns': {
+      id: '/lead-campaigns'
+      path: '/lead-campaigns'
+      fullPath: '/lead-campaigns'
+      preLoaderRoute: typeof LeadCampaignsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/leads': {
@@ -277,11 +376,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PipelineRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/referrals': {
+      id: '/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof ReferralsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/social': {
@@ -319,13 +439,19 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdsRoute: AdsRoute,
   CampaignsRoute: CampaignsRoute,
+  ConnectionsRoute: ConnectionsRoute,
   ContactsRoute: ContactsRoute,
+  CopilotRoute: CopilotRoute,
   FollowUpsRoute: FollowUpsRoute,
   GoogleSeoRoute: GoogleSeoRoute,
+  LeadCampaignsRoute: LeadCampaignsRoute,
   LeadsRoute: LeadsRoute,
   MeetingsRoute: MeetingsRoute,
   PipelineRoute: PipelineRoute,
+  ReferralsRoute: ReferralsRoute,
+  ReportsRoute: ReportsRoute,
   ServicesRoute: ServicesRoute,
+  SettingsRoute: SettingsRoute,
   SocialRoute: SocialRoute,
   TasksRoute: TasksRoute,
   AccountsIdRoute: AccountsIdRoute,
