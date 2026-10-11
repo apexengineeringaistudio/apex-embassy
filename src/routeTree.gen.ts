@@ -10,11 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdsRouteImport } from './routes/ads'
+import { Route as CampaignsRouteImport } from './routes/campaigns'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as FollowUpsRouteImport } from './routes/follow-ups'
+import { Route as GoogleSeoRouteImport } from './routes/google-seo'
 import { Route as LeadsRouteImport } from './routes/leads'
 import { Route as MeetingsRouteImport } from './routes/meetings'
 import { Route as PipelineRouteImport } from './routes/pipeline'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SocialRouteImport } from './routes/social'
 import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as AccountsIndexRouteImport } from './routes/accounts.index'
 import { Route as AccountsIdRouteImport } from './routes/accounts.$id'
@@ -22,6 +27,16 @@ import { Route as AccountsIdRouteImport } from './routes/accounts.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdsRoute = AdsRouteImport.update({
+  id: '/ads',
+  path: '/ads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampaignsRoute = CampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactsRoute = ContactsRouteImport.update({
@@ -32,6 +47,11 @@ const ContactsRoute = ContactsRouteImport.update({
 const FollowUpsRoute = FollowUpsRouteImport.update({
   id: '/follow-ups',
   path: '/follow-ups',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoogleSeoRoute = GoogleSeoRouteImport.update({
+  id: '/google-seo',
+  path: '/google-seo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LeadsRoute = LeadsRouteImport.update({
@@ -47,6 +67,16 @@ const MeetingsRoute = MeetingsRouteImport.update({
 const PipelineRoute = PipelineRouteImport.update({
   id: '/pipeline',
   path: '/pipeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialRoute = SocialRouteImport.update({
+  id: '/social',
+  path: '/social',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TasksRoute = TasksRouteImport.update({
@@ -67,22 +97,32 @@ const AccountsIdRoute = AccountsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ads': typeof AdsRoute
+  '/campaigns': typeof CampaignsRoute
   '/contacts': typeof ContactsRoute
   '/follow-ups': typeof FollowUpsRoute
+  '/google-seo': typeof GoogleSeoRoute
   '/leads': typeof LeadsRoute
   '/meetings': typeof MeetingsRoute
   '/pipeline': typeof PipelineRoute
+  '/services': typeof ServicesRoute
+  '/social': typeof SocialRoute
   '/tasks': typeof TasksRoute
   '/accounts/$id': typeof AccountsIdRoute
   '/accounts/': typeof AccountsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ads': typeof AdsRoute
+  '/campaigns': typeof CampaignsRoute
   '/contacts': typeof ContactsRoute
   '/follow-ups': typeof FollowUpsRoute
+  '/google-seo': typeof GoogleSeoRoute
   '/leads': typeof LeadsRoute
   '/meetings': typeof MeetingsRoute
   '/pipeline': typeof PipelineRoute
+  '/services': typeof ServicesRoute
+  '/social': typeof SocialRoute
   '/tasks': typeof TasksRoute
   '/accounts/$id': typeof AccountsIdRoute
   '/accounts': typeof AccountsIndexRoute
@@ -90,11 +130,16 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ads': typeof AdsRoute
+  '/campaigns': typeof CampaignsRoute
   '/contacts': typeof ContactsRoute
   '/follow-ups': typeof FollowUpsRoute
+  '/google-seo': typeof GoogleSeoRoute
   '/leads': typeof LeadsRoute
   '/meetings': typeof MeetingsRoute
   '/pipeline': typeof PipelineRoute
+  '/services': typeof ServicesRoute
+  '/social': typeof SocialRoute
   '/tasks': typeof TasksRoute
   '/accounts/$id': typeof AccountsIdRoute
   '/accounts/': typeof AccountsIndexRoute
@@ -103,33 +148,48 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ads'
+    | '/campaigns'
     | '/contacts'
     | '/follow-ups'
+    | '/google-seo'
     | '/leads'
     | '/meetings'
     | '/pipeline'
+    | '/services'
+    | '/social'
     | '/tasks'
     | '/accounts/$id'
     | '/accounts/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ads'
+    | '/campaigns'
     | '/contacts'
     | '/follow-ups'
+    | '/google-seo'
     | '/leads'
     | '/meetings'
     | '/pipeline'
+    | '/services'
+    | '/social'
     | '/tasks'
     | '/accounts/$id'
     | '/accounts'
   id:
     | '__root__'
     | '/'
+    | '/ads'
+    | '/campaigns'
     | '/contacts'
     | '/follow-ups'
+    | '/google-seo'
     | '/leads'
     | '/meetings'
     | '/pipeline'
+    | '/services'
+    | '/social'
     | '/tasks'
     | '/accounts/$id'
     | '/accounts/'
@@ -137,11 +197,16 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdsRoute: typeof AdsRoute
+  CampaignsRoute: typeof CampaignsRoute
   ContactsRoute: typeof ContactsRoute
   FollowUpsRoute: typeof FollowUpsRoute
+  GoogleSeoRoute: typeof GoogleSeoRoute
   LeadsRoute: typeof LeadsRoute
   MeetingsRoute: typeof MeetingsRoute
   PipelineRoute: typeof PipelineRoute
+  ServicesRoute: typeof ServicesRoute
+  SocialRoute: typeof SocialRoute
   TasksRoute: typeof TasksRoute
   AccountsIdRoute: typeof AccountsIdRoute
   AccountsIndexRoute: typeof AccountsIndexRoute
@@ -156,6 +221,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ads': {
+      id: '/ads'
+      path: '/ads'
+      fullPath: '/ads'
+      preLoaderRoute: typeof AdsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campaigns': {
+      id: '/campaigns'
+      path: '/campaigns'
+      fullPath: '/campaigns'
+      preLoaderRoute: typeof CampaignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contacts': {
       id: '/contacts'
       path: '/contacts'
@@ -168,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/follow-ups'
       fullPath: '/follow-ups'
       preLoaderRoute: typeof FollowUpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/google-seo': {
+      id: '/google-seo'
+      path: '/google-seo'
+      fullPath: '/google-seo'
+      preLoaderRoute: typeof GoogleSeoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/leads': {
@@ -189,6 +275,20 @@ declare module '@tanstack/react-router' {
       path: '/pipeline'
       fullPath: '/pipeline'
       preLoaderRoute: typeof PipelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social': {
+      id: '/social'
+      path: '/social'
+      fullPath: '/social'
+      preLoaderRoute: typeof SocialRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tasks': {
@@ -217,11 +317,16 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdsRoute: AdsRoute,
+  CampaignsRoute: CampaignsRoute,
   ContactsRoute: ContactsRoute,
   FollowUpsRoute: FollowUpsRoute,
+  GoogleSeoRoute: GoogleSeoRoute,
   LeadsRoute: LeadsRoute,
   MeetingsRoute: MeetingsRoute,
   PipelineRoute: PipelineRoute,
+  ServicesRoute: ServicesRoute,
+  SocialRoute: SocialRoute,
   TasksRoute: TasksRoute,
   AccountsIdRoute: AccountsIdRoute,
   AccountsIndexRoute: AccountsIndexRoute,
