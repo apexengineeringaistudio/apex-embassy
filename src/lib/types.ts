@@ -34,7 +34,7 @@ export interface Contact {
   id: string;
   name: string;
   role: string;
-  accountId?: string;
+  accountId?: string | undefined;
   isReferralPartner: boolean;
   tags: string[];
 }
@@ -56,7 +56,7 @@ export interface Activity {
   id: string;
   type: ActivityType;
   subject: string;
-  accountId?: string;
+  accountId?: string | undefined;
   due: string;
   completed: boolean;
   owner: string;
@@ -71,8 +71,8 @@ export interface Campaign {
   channel: CampaignChannel;
   goal: string;
   audience: string;
-  accountId?: string;
-  budget?: number;
+  accountId?: string | undefined;
+  budget?: number | undefined;
   status: CampaignStatus;
   tasks: { label: string; done: boolean }[];
   objective?: string;

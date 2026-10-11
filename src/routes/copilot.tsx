@@ -11,7 +11,7 @@ import { askCopilot, SUGGESTIONS, type CopilotAction, type CopilotReply } from "
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/copilot")({
-  validateSearch: (s: Record<string, unknown>) => ({ q: typeof s.q === "string" ? s.q : undefined }),
+  validateSearch: (s: Record<string, unknown>): { q?: string } => (typeof s["q"] === "string" ? { q: s["q"] } : {}),
   head: pageHead("Apex Copilot", "Internal AI copilot for follow-ups, pitches and drafts."),
   component: Copilot,
 });

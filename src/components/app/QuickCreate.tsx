@@ -26,7 +26,7 @@ export function QuickCreateProvider({ children }: { children: ReactNode }) {
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
+    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<"name" | "industry" | "relationship" | "value" | "next" | "notes" | "account" | "stage" | "source" | "due" | "type" | "channel" | "goal" | "audience", string>;
     if (!f.name?.trim()) { toast.error("Name is required"); return; }
     if (kind === "account") {
       repo.addAccount({
@@ -42,7 +42,7 @@ export function QuickCreateProvider({ children }: { children: ReactNode }) {
     } else if (kind === "campaign") {
       repo.addCampaign({ name: f.name, channel: f.channel as CampaignChannel, goal: f.goal || "—", audience: f.audience || "—", accountId: f.account || undefined, budget: Number(f.value) || undefined, status: "Draft", tasks: [] });
     }
-    toast.success(`${kind![0].toUpperCase()}${kind!.slice(1)} saved`, { description: "Saved to demo data (mock store, not persisted)." });
+    toast.success(`${kind ?? ""} saved`.replace(/^./, (c) => c.toUpperCase()), { description: "Saved to demo data (mock store, not persisted)." });
     close();
   };
 

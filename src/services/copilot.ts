@@ -55,7 +55,7 @@ export async function askCopilot(prompt: string, db: DB): Promise<CopilotReply> 
     ] };
   }
   if (p.includes("pitch") || p.includes("flight path")) {
-    const a = db.accounts.find((x) => p.includes(x.name.split(" ")[0].toLowerCase())) ?? db.accounts[0];
+    const a = db.accounts.find((x) => p.includes((x.name.split(" ")[0] ?? "").toLowerCase())) ?? db.accounts[0]!;
     const nbs = nextBestServices(a);
     return { text: `Possible next conversations for ${a.name}. These are hypotheses — validate before pitching.`, cards: [{
       title: `Next-best services — ${a.name}`, kind: "list",
@@ -64,7 +64,7 @@ export async function askCopilot(prompt: string, db: DB): Promise<CopilotReply> 
     }] };
   }
   if (p.includes("draft") || p.includes("girish")) {
-    const a = db.accounts.find((x) => p.includes(x.name.split(" ")[0].toLowerCase())) ?? db.accounts.find((x) => x.id === "a8")!;
+    const a = db.accounts.find((x) => p.includes((x.name.split(" ")[0] ?? "").toLowerCase())) ?? db.accounts.find((x) => x.id === "a8")!;
     return { text: `Here's a draft follow-up for ${a.name}. Nothing will be sent.`, cards: [{
       title: "Email draft", kind: "draft",
       body: `Hi ${a.name.split(" ")[0]},\n\nHope you're doing well. Following up on the ${a.servicesEvaluating[0]?.toLowerCase() ?? "proposal"} we shared — happy to walk through any questions or adjust scope.\n\nWould a short call this week work?\n\nRegards,\nApex Engineering`,

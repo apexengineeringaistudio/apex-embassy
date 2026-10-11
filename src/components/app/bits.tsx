@@ -23,7 +23,7 @@ const statusTone: Record<string, Tone> = {
   "Not configured": "neutral", "Planned ": "info",
 };
 
-export function Pill({ children, tone, className }: { children: ReactNode; tone?: Tone; className?: string }) {
+export function Pill({ children, tone, className }: { children: ReactNode; tone?: Tone | undefined; className?: string }) {
   const t = tone ?? statusTone[String(children)] ?? "neutral";
   return (
     <span className={cn("inline-flex items-center whitespace-nowrap rounded border px-1.5 py-px text-[11px] font-medium leading-4", toneCls[t], className)}>

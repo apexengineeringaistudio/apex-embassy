@@ -22,8 +22,8 @@ function LeadCampaigns() {
   const [open, setOpen] = useState(false);
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<string, string>;
-    if (!f.name) return toast.error("Name required");
+    const f = Object.fromEntries(new FormData(e.currentTarget)) as Record<"name" | "industry" | "relationship" | "value" | "next" | "notes" | "account" | "stage" | "source" | "due" | "type" | "channel" | "goal" | "audience", string>;
+    if (!f.name) { toast.error("Name required"); return; }
     repo.addLeadCampaign({ name: f.name, goal: f.goal as LeadCampaign["goal"], sources: [f.source || "Placeholder"], leadCount: 0, qualified: 0, status: "Draft", nextAction: "Define criteria" });
     toast.success("Lead campaign created", { description: "Demo data only." });
     setOpen(false);
