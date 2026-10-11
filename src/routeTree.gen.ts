@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as FollowUpsRouteImport } from './routes/follow-ups'
+import { Route as LeadsRouteImport } from './routes/leads'
+import { Route as MeetingsRouteImport } from './routes/meetings'
+import { Route as PipelineRouteImport } from './routes/pipeline'
+import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as AccountsIndexRouteImport } from './routes/accounts.index'
+import { Route as AccountsIdRouteImport } from './routes/accounts.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FollowUpsRoute = FollowUpsRouteImport.update({
+  id: '/follow-ups',
+  path: '/follow-ups',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsRoute = LeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetingsRoute = MeetingsRouteImport.update({
+  id: '/meetings',
+  path: '/meetings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PipelineRoute = PipelineRouteImport.update({
+  id: '/pipeline',
+  path: '/pipeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksRoute = TasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountsIndexRoute = AccountsIndexRouteImport.update({
+  id: '/accounts/',
+  path: '/accounts/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountsIdRoute = AccountsIdRouteImport.update({
+  id: '/accounts/$id',
+  path: '/accounts/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
+  '/follow-ups': typeof FollowUpsRoute
+  '/leads': typeof LeadsRoute
+  '/meetings': typeof MeetingsRoute
+  '/pipeline': typeof PipelineRoute
+  '/tasks': typeof TasksRoute
+  '/accounts/$id': typeof AccountsIdRoute
+  '/accounts/': typeof AccountsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
+  '/follow-ups': typeof FollowUpsRoute
+  '/leads': typeof LeadsRoute
+  '/meetings': typeof MeetingsRoute
+  '/pipeline': typeof PipelineRoute
+  '/tasks': typeof TasksRoute
+  '/accounts/$id': typeof AccountsIdRoute
+  '/accounts': typeof AccountsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacts': typeof ContactsRoute
+  '/follow-ups': typeof FollowUpsRoute
+  '/leads': typeof LeadsRoute
+  '/meetings': typeof MeetingsRoute
+  '/pipeline': typeof PipelineRoute
+  '/tasks': typeof TasksRoute
+  '/accounts/$id': typeof AccountsIdRoute
+  '/accounts/': typeof AccountsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contacts'
+    | '/follow-ups'
+    | '/leads'
+    | '/meetings'
+    | '/pipeline'
+    | '/tasks'
+    | '/accounts/$id'
+    | '/accounts/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contacts'
+    | '/follow-ups'
+    | '/leads'
+    | '/meetings'
+    | '/pipeline'
+    | '/tasks'
+    | '/accounts/$id'
+    | '/accounts'
+  id:
+    | '__root__'
+    | '/'
+    | '/contacts'
+    | '/follow-ups'
+    | '/leads'
+    | '/meetings'
+    | '/pipeline'
+    | '/tasks'
+    | '/accounts/$id'
+    | '/accounts/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactsRoute: typeof ContactsRoute
+  FollowUpsRoute: typeof FollowUpsRoute
+  LeadsRoute: typeof LeadsRoute
+  MeetingsRoute: typeof MeetingsRoute
+  PipelineRoute: typeof PipelineRoute
+  TasksRoute: typeof TasksRoute
+  AccountsIdRoute: typeof AccountsIdRoute
+  AccountsIndexRoute: typeof AccountsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/follow-ups': {
+      id: '/follow-ups'
+      path: '/follow-ups'
+      fullPath: '/follow-ups'
+      preLoaderRoute: typeof FollowUpsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads': {
+      id: '/leads'
+      path: '/leads'
+      fullPath: '/leads'
+      preLoaderRoute: typeof LeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meetings': {
+      id: '/meetings'
+      path: '/meetings'
+      fullPath: '/meetings'
+      preLoaderRoute: typeof MeetingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pipeline': {
+      id: '/pipeline'
+      path: '/pipeline'
+      fullPath: '/pipeline'
+      preLoaderRoute: typeof PipelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks': {
+      id: '/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof TasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accounts/': {
+      id: '/accounts/'
+      path: '/accounts'
+      fullPath: '/accounts/'
+      preLoaderRoute: typeof AccountsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accounts/$id': {
+      id: '/accounts/$id'
+      path: '/accounts/$id'
+      fullPath: '/accounts/$id'
+      preLoaderRoute: typeof AccountsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactsRoute: ContactsRoute,
+  FollowUpsRoute: FollowUpsRoute,
+  LeadsRoute: LeadsRoute,
+  MeetingsRoute: MeetingsRoute,
+  PipelineRoute: PipelineRoute,
+  TasksRoute: TasksRoute,
+  AccountsIdRoute: AccountsIdRoute,
+  AccountsIndexRoute: AccountsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
