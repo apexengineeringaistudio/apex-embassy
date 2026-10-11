@@ -67,7 +67,7 @@ export async function askCopilot(prompt: string, db: DB): Promise<CopilotReply> 
     const a = db.accounts.find((x) => p.includes((x.name.split(" ")[0] ?? "").toLowerCase())) ?? db.accounts.find((x) => x.id === "a8")!;
     return { text: `Here's a draft follow-up for ${a.name}. Nothing will be sent.`, cards: [{
       title: "Email draft", kind: "draft",
-      body: `Hi ${a.name.split(" ")[0]},\n\nHope you're doing well. Following up on the ${a.servicesEvaluating[0]?.toLowerCase() ?? "proposal"} we shared — happy to walk through any questions or adjust scope.\n\nWould a short call this week work?\n\nRegards,\nApex Engineering`,
+      body: `Hi ${a.name.split(" ")[0]},\n\nHope you're doing well. Following up on the proposal we shared — happy to walk through any questions or adjust scope.\n\nWould a short call this week work?\n\nRegards,\nApex Engineering`,
       actions: [{ label: "Copy draft", external: false }, { label: "Send via Apex Gmail", external: true, detail: `Would email ${a.name}.` }],
     }] };
   }
