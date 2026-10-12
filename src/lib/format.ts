@@ -1,7 +1,8 @@
 import { TODAY } from "./constants";
 
 const inr = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
-export const money = (n?: number) => (n == null ? "—" : inr.format(n));
+/** Unverified amounts are stored as 0 and shown as TBD. */
+export const money = (n?: number) => (n == null || n === 0 ? "TBD" : inr.format(n));
 export const moneyShort = (n: number) =>
   n >= 100000 ? `₹${(n / 100000).toFixed(n >= 1000000 ? 0 : 1)}L` : n >= 1000 ? `₹${Math.round(n / 1000)}k` : `₹${n}`;
 
