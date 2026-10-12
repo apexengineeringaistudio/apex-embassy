@@ -1,7 +1,7 @@
 import type { CoverageStatus, LeadStage, ServiceKey } from "./types";
 
-/** Fixed "today" for deterministic demo data (avoids SSR/client mismatch). */
-export const TODAY = "2026-10-11";
+/** Fixed operational snapshot date (avoids SSR/client mismatch until backend sync). */
+export const TODAY = "2026-10-12";
 
 export const LEAD_STAGES: LeadStage[] = ["New", "Qualified", "Contacted", "Discovery", "Proposal", "Negotiation", "Won", "Lost", "Nurture"];
 

@@ -7,6 +7,13 @@ export type ActivityType = "call" | "email" | "meeting" | "whatsapp" | "proposal
 export type CoverageStatus = "Active" | "Delivered" | "Needs Review" | "Opportunity" | "Not Relevant" | "Unknown";
 export type ServiceKey = "website" | "ecommerce" | "gbp" | "seo" | "ga4" | "gsc" | "social" | "ads" | "amc" | "ai";
 
+export interface AccountFile {
+  title: string;
+  kind: "Proposal" | "Presentation" | "Invoice" | "Audit" | "Document" | "Template" | "Sample";
+  url: string;
+  date?: string;
+}
+
 export interface Account {
   id: string;
   name: string;
@@ -28,6 +35,8 @@ export interface Account {
   owner: string;
   notes: string;
   coverage: Record<ServiceKey, CoverageStatus>;
+  folderUrl?: string;
+  files?: AccountFile[];
 }
 
 export interface Contact {
@@ -60,6 +69,8 @@ export interface Activity {
   due: string;
   completed: boolean;
   owner: string;
+  /** Operational priority order (lower = more urgent). */
+  rank?: number;
 }
 
 export type CampaignChannel = "Google Ads" | "SEO" | "Social" | "Launch/Publicity" | "Re-engagement" | "Lead Generation" | "Meta Ads";
