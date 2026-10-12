@@ -8,6 +8,7 @@ import { Avatar, Panel, Pill, EmptyState } from "@/components/app/bits";
 import { ActivityList } from "@/components/app/ActivityList";
 import { CoverageCell, CoverageLegend } from "@/components/app/CoverageCell";
 import { useQuickCreate } from "@/components/app/QuickCreate";
+import { FileLink, FolderButton } from "@/components/app/ClientFiles";
 import { SERVICE_COLUMNS } from "@/lib/constants";
 import { fmtDate, money } from "@/lib/format";
 import { nextBestServices } from "@/lib/insights";
@@ -98,6 +99,11 @@ function Client360() {
               <li key={n.key} className="rounded-md border p-2"><div className="flex items-center justify-between"><span className="text-[13px] font-medium">{n.label}</span><Pill>{n.status === "Opportunity" ? "Needs Review" : n.status}</Pill></div><div className="mt-0.5 text-[11px] text-muted-foreground">{n.reason}</div></li>
             ))}</ul> : <EmptyState title="No open hypotheses" />}
           </Panel>
+          {(a.folderUrl || a.files?.length) && (
+            <Panel title="Files & Documents" action={a.folderUrl ? <FolderButton url={a.folderUrl} /> : undefined}>
+              {a.files?.length ? <div className="space-y-2">{a.files.map((f) => <FileLink key={f.url} file={f} />)}</div> : <EmptyState title="No files listed" />}
+            </Panel>
+          )}
           <Panel title="Commercial summary">
             <Row k="Estimated value" v={<span className="num">{money(a.estValue)}</span>} />
             <Row k="Won to date" v={<span className="num">{money(won)}</span>} />
