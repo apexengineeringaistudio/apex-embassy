@@ -10,6 +10,7 @@ import { LEAD_STAGES, TODAY } from "@/lib/constants";
 import { daysFromToday, fmtDate, money, moneyShort } from "@/lib/format";
 import { nextBestServices } from "@/lib/insights";
 import { pageHead } from "@/lib/seo";
+import { FileLink } from "@/components/app/ClientFiles";
 
 export const Route = createFileRoute("/")({
   head: pageHead("Command Center", "Daily overview of accounts, pipeline, follow-ups and growth opportunities."),
@@ -48,7 +49,7 @@ function CommandCenter() {
   const overdue = openActs.filter((a) => daysFromToday(a.due) < 0);
   const week = db.activities.filter((a) => { const d = daysFromToday(a.due); return d >= -3 && d <= 3; });
   const recurring = db.accounts.filter((a) => a.relationship === "Client").reduce((s, a) => s + a.recurringPotential, 0);
-  const priorities = openActs.filter((a) => daysFromToday(a.due) <= 0).sort((a, b) => a.due.localeCompare(b.due));
+  const priorities = openActs.filter((a) => a.rank != null && a.rank <= 6).sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99) || a.due.localeCompare(b.due));
   const funnel = LEAD_STAGES.filter((s) => s !== "Lost" && s !== "Nurture").map((s) => {
     const ls = db.leads.filter((l) => l.stage === s);
     return { s, n: ls.length, v: ls.reduce((t, l) => t + l.value, 0) };
@@ -59,11 +60,21 @@ function CommandCenter() {
     const ls = db.leads.filter((l) => l.partnerId === p.id);
     return { p, intro: ls.length, won: ls.filter((l) => l.stage === "Won").length, value: ls.filter((l) => l.stage !== "Lost").reduce((s, l) => s + l.value, 0) };
   });
+  const maaom = byId(db.accounts, "a4");
+  const green = byId(db.accounts, "a3");
+  const nikhil = byId(db.accounts, "a6");
+  const newLeads = db.leads.filter((l) => l.stage === "New");
+  const pick = (id: string, titles: string[]) => { const a = byId(db.accounts, id); return (a?.files ?? []).filter((f) => titles.includes(f.title)).map((f) => ({ f, sub: a!.name })); };
+  const recentFiles = [
+    ...pick("a4", ["Wed Management Presentation (PDF)", "Commercial Proposal (PDF)"]),
+    ...pick("a6", ["Accepted proposal"]),
+    ...pick("a3", ["Corrected invoice — ₹18,000"]),
+  ];
   const recent = db.activities.filter((a) => a.completed).sort((a, b) => b.due.localeCompare(a.due)).slice(0, 6);
 
   return (
     <>
-      <PageHeader eyebrow={`Today · ${fmtDate(TODAY)} 2026`} title="Command Center" subtitle="Your acquisition and client lifecycle at a glance." />
+      <PageHeader eyebrow={`Operational snapshot · ${fmtDate(TODAY)} 2026`} title="Command Center" subtitle="Your acquisition and client lifecycle at a glance." />
       <AskApex />
       <div className="mb-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4 xl:grid-cols-8">
         <Kpi label="Accounts" value={db.accounts.length} icon={<Building2 className="size-3.5" />} />
@@ -74,6 +85,27 @@ function CommandCenter() {
         <Kpi label="Recurring" value={moneyShort(recurring)} icon={<Repeat className="size-3.5" />} hint="Potential /mo · placeholder" />
         <Kpi label="Overdue" value={<span className={overdue.length ? "text-destructive" : ""}>{overdue.length}</span>} icon={<AlarmClock className="size-3.5" />} hint="Follow-ups" />
         <Kpi label="This week" value={week.length} icon={<CalendarDays className="size-3.5" />} hint="Activities" />
+      </div>
+
+      <div className="mb-3 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {maaom && <Panel title="Wed 14 Oct · 10:00 AM" action={<Pill tone="danger">Key visit</Pill>}>
+          <Link to="/accounts/$id" params={{ id: maaom.id }} className="text-sm font-semibold hover:text-primary">MaaOm Logistics — Vashi</Link>
+          <p className="mt-1 text-[12px] text-muted-foreground">Full-day visit · management presentation + commercial proposal. Discussion value {money(maaom.estValue)} (₹10k completed issue + ₹30k verified audit); remediation separate.</p>
+          {maaom.folderUrl && <a href={maaom.folderUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs text-primary">Open client folder ↗</a>}
+        </Panel>}
+        {nikhil && <Panel title="Won · 12 Oct" action={<Pill tone="primary">Client</Pill>}>
+          <Link to="/accounts/$id" params={{ id: nikhil.id }} className="text-sm font-semibold hover:text-primary">{nikhil.name}</Link>
+          <p className="mt-1 text-[12px] text-muted-foreground">{money(nikhil.estValue)} Founder Launch + {money(nikhil.recurringPotential)}/mo MicroCommerce. Inputs due Tue 13 Oct.</p>
+        </Panel>}
+        {green && <Panel title="Payment awaiting response" action={<Pill tone="warning">Receivable</Pill>}>
+          <Link to="/accounts/$id" params={{ id: green.id }} className="text-sm font-semibold hover:text-primary">{green.name}</Link>
+          <p className="mt-1 text-[12px] text-muted-foreground">Invoice {money(green.estValue)} · follow-up sent 12 Oct to Mr Deshmukh. Awaiting confirmation / date.</p>
+        </Panel>}
+        <Panel title="New leads · 12 Oct" action={<Link to="/leads" className="text-xs text-primary">Leads</Link>}>
+          <ul className="space-y-1 text-[13px]">{newLeads.map((l) => { const a = byId(db.accounts, l.accountId); return (
+            <li key={l.id} className="flex justify-between gap-2"><Link to="/accounts/$id" params={{ id: l.accountId }} className="truncate hover:text-primary">{a?.name}</Link><span className="shrink-0 text-[11px] text-muted-foreground">Qualify</span></li>
+          ); })}</ul>
+        </Panel>
       </div>
 
       <div className="grid gap-3 xl:grid-cols-3">
@@ -115,6 +147,9 @@ function CommandCenter() {
               <tr key={r.p.id} className="border-t"><td className="py-1.5">{r.p.name}</td><td className="num">{r.intro}</td><td className="num">{r.won}</td><td className="num text-right">{moneyShort(r.value)}</td></tr>
             ))}</tbody>
           </table>
+        </Panel>
+        <Panel title="Recent client files" className="xl:col-span-1">
+          <div className="space-y-2">{recentFiles.map(({ f, sub }) => <FileLink key={f.url} file={f} sub={sub} />)}</div>
         </Panel>
         <Panel title="Recent activity">
           <ul className="divide-y">
