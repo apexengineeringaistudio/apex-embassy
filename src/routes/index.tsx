@@ -65,7 +65,7 @@ function CommandCenter() {
   const nikhil = byId(db.accounts, "a6");
   const mansi = byId(db.accounts, "a14");
   const newLeads = db.leads.filter((l) => l.stage === "New");
-  const pick = (id: string, titles: string[]) => { const a = byId(db.accounts, id); return (a?.files ?? []).filter((f) => titles.includes(f.title)).map((f) => ({ f, sub: a!.name })); };
+  const pick = (id: string, titles: string[]) => { const a = byId(db.accounts, id); if (!a) return []; return (a.files ?? []).filter((f) => titles.includes(f.title)).map((f) => ({ f, sub: a.name })); };
   const recentFiles = [
     ...pick("a4", ["Wed Management Presentation (PDF)", "Commercial Proposal (PDF)"]),
     ...pick("a6", ["Accepted proposal"]),
@@ -94,7 +94,7 @@ function CommandCenter() {
           <p className="mt-1 text-[12px] text-muted-foreground">Presentation only: current assessment, management feedback, access and ownership. Vashi visit next week; date/time pending.</p>
           {maaom.folderUrl && <a href={maaom.folderUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs text-primary">Open client folder ↗</a>}
         </Panel>}
-        {nikhil && <Panel title="14 Oct · After MaaOm Teams" action={<Pill tone="warning">Confirmation pending</Pill>}>
+        {nikhil && <Panel title="14 Oct · After MaaOm Teams" action={<Pill tone="warning">Pending</Pill>}>
           <Link to="/accounts/$id" params={{ id: nikhil.id }} className="text-sm font-semibold hover:text-primary">{nikhil.name}</Link>
           <p className="mt-1 text-[12px] text-muted-foreground">Positive chocolate proposal; discussion planned. Inputs, kickoff timing and visit confirmation pending. No start confirmed.</p>
         </Panel>}
@@ -113,7 +113,7 @@ function CommandCenter() {
         </Panel>
       </div>
 
-      <div className="grid gap-3 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-3 [&>section]:min-w-0">
         <Panel title="Today's priorities" action={<Link to="/follow-ups" className="text-xs text-primary">All follow-ups</Link>} className="xl:col-span-1">
           <ActivityList items={priorities} compact emptyTitle="You're clear for today" />
         </Panel>
