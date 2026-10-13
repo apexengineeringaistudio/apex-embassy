@@ -63,8 +63,9 @@ function CommandCenter() {
   const maaom = byId(db.accounts, "a4");
   const green = byId(db.accounts, "a3");
   const nikhil = byId(db.accounts, "a6");
+  const mansi = byId(db.accounts, "a14");
   const newLeads = db.leads.filter((l) => l.stage === "New");
-  const pick = (id: string, titles: string[]) => { const a = byId(db.accounts, id); return (a?.files ?? []).filter((f) => titles.includes(f.title)).map((f) => ({ f, sub: a!.name })); };
+  const pick = (id: string, titles: string[]) => { const a = byId(db.accounts, id); if (!a) return []; return (a.files ?? []).filter((f) => titles.includes(f.title)).map((f) => ({ f, sub: a.name })); };
   const recentFiles = [
     ...pick("a4", ["Wed Management Presentation (PDF)", "Commercial Proposal (PDF)"]),
     ...pick("a6", ["Accepted proposal"]),
@@ -88,14 +89,14 @@ function CommandCenter() {
       </div>
 
       <div className="mb-3 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-        {maaom && <Panel title="Wed 14 Oct · 10:00 AM" action={<Pill tone="danger">Key visit</Pill>}>
-          <Link to="/accounts/$id" params={{ id: maaom.id }} className="text-sm font-semibold hover:text-primary">MaaOm Logistics — Vashi</Link>
-          <p className="mt-1 text-[12px] text-muted-foreground">Full-day visit · management presentation + commercial proposal. Discussion value {money(maaom.estValue)} (₹10k completed issue + ₹30k verified audit); remediation separate.</p>
+        {maaom && <Panel title="Wed 14 Oct · 11:00 AM" action={<Pill tone="danger">Teams</Pill>}>
+          <Link to="/accounts/$id" params={{ id: maaom.id }} className="text-sm font-semibold hover:text-primary">MaaOm Logistics — Microsoft Teams</Link>
+          <p className="mt-1 text-[12px] text-muted-foreground">Presentation only: current assessment, management feedback, access and ownership. Vashi visit next week; date/time pending.</p>
           {maaom.folderUrl && <a href={maaom.folderUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs text-primary">Open client folder ↗</a>}
         </Panel>}
-        {nikhil && <Panel title="Won · 12 Oct" action={<Pill tone="primary">Client</Pill>}>
+        {nikhil && <Panel title="14 Oct · After MaaOm Teams" action={<Pill tone="warning">Pending</Pill>}>
           <Link to="/accounts/$id" params={{ id: nikhil.id }} className="text-sm font-semibold hover:text-primary">{nikhil.name}</Link>
-          <p className="mt-1 text-[12px] text-muted-foreground">{money(nikhil.estValue)} Founder Launch + {money(nikhil.recurringPotential)}/mo MicroCommerce. Inputs due Tue 13 Oct.</p>
+          <p className="mt-1 text-[12px] text-muted-foreground">Positive chocolate proposal; discussion planned. Inputs, kickoff timing and visit confirmation pending. No start confirmed.</p>
         </Panel>}
         {green && <Panel title="Payment awaiting response" action={<Pill tone="warning">Receivable</Pill>}>
           <Link to="/accounts/$id" params={{ id: green.id }} className="text-sm font-semibold hover:text-primary">{green.name}</Link>
@@ -103,12 +104,16 @@ function CommandCenter() {
         </Panel>}
         <Panel title="New leads · 12 Oct" action={<Link to="/leads" className="text-xs text-primary">Leads</Link>}>
           <ul className="space-y-1 text-[13px]">{newLeads.map((l) => { const a = byId(db.accounts, l.accountId); return (
-            <li key={l.id} className="flex justify-between gap-2"><Link to="/accounts/$id" params={{ id: l.accountId }} className="truncate hover:text-primary">{a?.name}</Link><span className="shrink-0 text-[11px] text-muted-foreground">Qualify</span></li>
+            <li key={l.id} className="flex flex-col gap-0.5"><Link to="/accounts/$id" params={{ id: l.accountId }} className="truncate hover:text-primary">{a?.name}</Link><span className="text-[11px] text-muted-foreground">{l.nextAction}</span></li>
           ); })}</ul>
+          {mansi && <div className="mt-2 border-t pt-2 text-[12px]">
+            <Link to="/accounts/$id" params={{ id: mansi.id }} className="font-semibold hover:text-primary">Mansi Mathur · Warm lead</Link>
+            <p className="mt-1 text-muted-foreground">Potential 1–2 ecommerce stores + Autonoma campaign management. {mansi.nextAction}</p>
+          </div>}
         </Panel>
       </div>
 
-      <div className="grid gap-3 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-3 [&>section]:min-w-0">
         <Panel title="Today's priorities" action={<Link to="/follow-ups" className="text-xs text-primary">All follow-ups</Link>} className="xl:col-span-1">
           <ActivityList items={priorities} compact emptyTitle="You're clear for today" />
         </Panel>

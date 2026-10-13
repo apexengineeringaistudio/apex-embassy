@@ -7,6 +7,7 @@ export const moneyShort = (n: number) =>
   n >= 100000 ? `₹${(n / 100000).toFixed(n >= 1000000 ? 0 : 1)}L` : n >= 1000 ? `₹${Math.round(n / 1000)}k` : `₹${n}`;
 
 export const fmtDate = (iso: string) => {
+  if (!iso) return "TBD";
   const d = new Date(iso + "T00:00:00");
   return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short" });
 };
