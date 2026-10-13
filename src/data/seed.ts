@@ -1,6 +1,6 @@
 import type { Account, Activity, Campaign, Contact, CoverageStatus, Lead, LeadCampaign, Project, ServiceKey } from "@/lib/types";
 
-// Operational snapshot as of 12 Oct 2026. Unverified amounts are 0 (shown as TBD). No emails or phone numbers stored.
+// Operational snapshot as of 13 Oct 2026. Unverified amounts are 0 (shown as TBD). No emails or phone numbers stored.
 const cov = (o: Partial<Record<ServiceKey, CoverageStatus>>): Record<ServiceKey, CoverageStatus> => ({
   website: "Unknown", ecommerce: "Unknown", gbp: "Unknown", seo: "Unknown", ga4: "Unknown",
   gsc: "Unknown", social: "Unknown", ads: "Unknown", amc: "Unknown", ai: "Unknown", ...o,
@@ -19,6 +19,7 @@ export const seedContacts: Contact[] = [
   { id: "c10", name: "Krishna Singh", role: "Prospect · NoBroker (affiliation only)", accountId: "a11", isReferralPartner: false, tags: ["New lead"] },
   { id: "c11", name: "Jaskaran Singh", role: "GT Boys — Sports Apparel", accountId: "a12", isReferralPartner: false, tags: ["New lead"] },
   { id: "c12", name: "Ashish Wadekar", role: "Business owner · Baner Business Bay (to verify)", accountId: "a13", isReferralPartner: false, tags: ["New lead", "To verify"] },
+  { id: "c13", name: "Mansi Mathur", role: "Prospect", accountId: "a14", isReferralPartner: false, tags: ["Warm lead"] },
 ];
 
 const D = "https://drive.google.com/file/d/";
@@ -50,8 +51,8 @@ export const seedAccounts: Account[] = [
     folderUrl: "https://drive.google.com/drive/folders/19FrV_hnC78sEI0uIN0d4A0P-ZHXQunGe",
     files: [{ title: "Corrected invoice — ₹18,000", kind: "Invoice", url: D + "16SKg30YZyAfa4xv31gbWpYfR16nXg83q/view" }] },
   { id: "a4", name: "MaaOm Logistics", kind: "Company", industry: "Logistics", city: "Vashi, Navi Mumbai", relationship: "Prospect", source: "Direct", stage: "Proposal", priority: "High",
-    servicesDelivered: ["Website / CIS access issue resolution (billable)", "Preliminary technical audit (9 Oct)"], servicesEvaluating: ["Verified technical audit", "Remediation (after findings)", "Modernisation"], estValue: 40000, recurringPotential: 0, lastContact: "2026-10-09", nextAction: "Wed 14 Oct 10:00 AM — present management deck + proposal; bill completed issue resolution", owner: "Amar",
-    notes: "Website/CIS access issue resolved/stabilised by Apex (billable). Preliminary technical audit emailed 9 Oct — not a penetration test; full security audit NOT completed. Full-day Vashi visit Wed 14 Oct, management presentation 10:00 AM; travel by car, fuel split 50/50. Proposed path: ₹10,000 completed issue resolution + ₹30,000 verified technical audit = ₹40,000; remediation quoted separately after findings.",
+    servicesDelivered: ["Website / CIS access issue resolution (billable)", "Preliminary technical audit (9 Oct)"], servicesEvaluating: ["Verified technical audit", "Remediation (after findings)", "Modernisation"], estValue: 40000, recurringPotential: 0, lastContact: "2026-10-09", nextAction: "14 Oct, 11:00 AM — Teams presentation only; gather feedback/access/ownership. Vashi next week, date/time pending.", owner: "Amar",
+    notes: "Website/CIS access issue resolved/stabilised by Apex (billable). Preliminary technical audit emailed 9 Oct — not a penetration test; full security audit NOT completed. Online Microsoft Teams management presentation 14 Oct at 11:00 AM: use presentation only, explain current assessment and gather management feedback, access and ownership information. No commercial proposal presentation planned for this meeting. In-person Vashi visit moves to next week; exact date/time pending. Proposed path remains ₹10,000 completed issue resolution + ₹30,000 verified technical audit = ₹40,000; remediation quoted separately after findings.",
     coverage: cov({ website: "Needs Review", ecommerce: "Not Relevant", amc: "Opportunity" }),
     folderUrl: "https://drive.google.com/drive/folders/1Cf1xNrvKcGTs71FHkMGzrtNWKnaeo463",
     files: [
@@ -65,10 +66,10 @@ export const seedAccounts: Account[] = [
     servicesDelivered: [], servicesEvaluating: ["Social / digital communication (tentative)"], estValue: 0, recurringPotential: 0, lastContact: "2026-10-06", nextAction: "Confirm real interest, meeting or package scope", owner: "Amar",
     notes: "No confirmed progress. Proposal/tentative status only.",
     coverage: cov({ social: "Opportunity", ecommerce: "Not Relevant" }) },
-  { id: "a6", name: "Nikhil Bhat — Chocolate Business", kind: "Company", industry: "Food / D2C", city: "Bengaluru", relationship: "Client", primaryContactId: "c7", source: "Direct", stage: "Active", priority: "High",
-    servicesDelivered: [], servicesEvaluating: ["Founder Launch Package (won)", "Apex MicroCommerce platform (won)"], estValue: 22500, recurringPotential: 3000, lastContact: "2026-10-12", nextAction: "Receive business/product inputs (13 Oct), confirm assets/scope, start launch", owner: "Amar",
-    notes: "Proposal ACCEPTED 12 Oct. ₹22,500 one-time Founder Launch Package + ₹3,000/month MicroCommerce platform. Optional services not sold. Client will provide inputs by 13 Oct.",
-    coverage: cov({ website: "Active", ecommerce: "Active", social: "Opportunity", gbp: "Opportunity" }),
+  { id: "a6", name: "Nikhil Bhat — Chocolate Business", kind: "Company", industry: "Food / D2C", city: "Bengaluru", relationship: "Client", primaryContactId: "c7", source: "Direct", stage: "Proposal", priority: "High",
+    servicesDelivered: [], servicesEvaluating: ["Founder Launch Package (previously accepted; kickoff pending)", "Apex MicroCommerce platform (previously accepted; kickoff pending)"], estValue: 22500, recurringPotential: 3000, lastContact: "2026-10-12", nextAction: "14 Oct, after MaaOm Teams — discuss proposal; confirm inputs, kickoff timing and visit. No start confirmed.", owner: "Amar",
+    notes: "Previously recorded proposal acceptance on 12 Oct retained; chocolate proposal remains positive. ₹22,500 one-time Founder Launch Package + ₹3,000/month MicroCommerce platform. Optional services not sold. Proposal discussion planned 14 Oct after the 11:00 AM MaaOm Teams meeting; exact time pending. Business/product inputs, kickoff timing and visit confirmation remain pending. No additional win or started work confirmed.",
+    coverage: cov({ website: "Opportunity", ecommerce: "Opportunity", social: "Opportunity", gbp: "Opportunity" }),
     folderUrl: "https://drive.google.com/drive/folders/1u2Nt3k0GjVVJDfGlMOejlBQTZH9DPrXm",
     files: [{ title: "Accepted proposal", kind: "Proposal", url: D + "1_E9HsSDIyoCCZlGEY2AKcgfwNw1ghxfb/view", date: "2026-10-12" }] },
   { id: "a7", name: "Lalita Flour Mill", kind: "Company", industry: "Food manufacturing", city: "Satara", relationship: "Prospect", sourcePartnerId: "c2", source: "Referral", stage: "Negotiation", priority: "High",
@@ -86,8 +87,8 @@ export const seedAccounts: Account[] = [
     notes: "Discovery around Tally/custom reporting and Power BI-style workflows. No website sale.",
     coverage: cov({ ai: "Opportunity" }) },
   { id: "a10", name: "Rohan Duggal", kind: "Person", industry: "Fashion & jewellery retail", city: "TBD", relationship: "Prospect", primaryContactId: "c9", source: "Direct", stage: "Prospecting", priority: "Medium",
-    servicesDelivered: [], servicesEvaluating: ["Ecommerce — Fashion store", "Ecommerce — Jewellery store"], estValue: 0, recurringPotential: 0, lastContact: "2026-10-12", nextAction: "Discovery: one or two brands/stores, catalogue, budget, timeline", owner: "Amar",
-    notes: "Added 12 Oct. Potential Fashion Store + Jewellery Store ecommerce. Discovery pending.", coverage: cov({ ecommerce: "Opportunity" }) },
+    servicesDelivered: [], servicesEvaluating: ["Ecommerce — Fashion store", "Ecommerce — Jewellery store"], estValue: 0, recurringPotential: 0, lastContact: "2026-10-12", nextAction: "14 Oct, 11:00 AM — remind/contact to confirm evening discovery time; discuss fashion/jewellery ecommerce scope.", owner: "Amar",
+    notes: "Added 12 Oct. Potential Fashion Store + Jewellery Store ecommerce. Discovery meeting planned 14 Oct evening; exact time pending. Contact/remind at 11:00 AM on 14 Oct to confirm evening meeting time and discuss fashion/jewellery ecommerce scope.", coverage: cov({ ecommerce: "Opportunity" }) },
   { id: "a11", name: "Krishna Singh", kind: "Person", industry: "Perfume retail", city: "TBD", relationship: "Prospect", primaryContactId: "c10", source: "Direct", stage: "Prospecting", priority: "Medium",
     servicesDelivered: [], servicesEvaluating: ["Ecommerce — Perfume store"], estValue: 0, recurringPotential: 0, lastContact: "2026-10-12", nextAction: "Discovery: perfume store scope", owner: "Amar",
     notes: "Added 12 Oct. Associated with NoBroker (affiliation only — not the client/project). Discovery pending.", coverage: cov({ ecommerce: "Opportunity" }) },
@@ -97,28 +98,32 @@ export const seedAccounts: Account[] = [
   { id: "a13", name: "Ashish Wadekar", kind: "Person", industry: "To verify", city: "Pune (Baner)", relationship: "Prospect", primaryContactId: "c12", source: "Direct", stage: "Prospecting", priority: "Low",
     servicesDelivered: [], servicesEvaluating: [], estValue: 0, recurringPotential: 0, lastContact: "2026-10-12", nextAction: "Qualify: verify identity, business and requirement", owner: "Amar",
     notes: "Added 12 Oct. Business owner contact from Baner Business Bay; identity/business details to verify. No specific requirement yet.", coverage: cov({}) },
+  { id: "a14", name: "Mansi Mathur", kind: "Person", industry: "TBD", city: "TBD", relationship: "Prospect", primaryContactId: "c13", source: "TBD", stage: "Prospecting", priority: "Medium",
+    servicesDelivered: [], servicesEvaluating: ["One or two ecommerce stores (potential)", "Autonoma campaign / campaign management (opportunity)"], estValue: 0, recurringPotential: 0, lastContact: "", nextAction: "Keep warm; follow up around 27 Oct (~2 weeks) on stores and Autonoma campaign scope.", owner: "Amar",
+    notes: "Warm lead. Potential requirement for one or two ecommerce stores plus an Autonoma campaign / campaign-management opportunity. Requirement likely in about two weeks, not immediate; scope, value and outcome unconfirmed. Follow-up target around 27 Oct, not a confirmed meeting.", coverage: cov({ ecommerce: "Opportunity", ads: "Opportunity" }) },
 ];
 
 export const seedLeads: Lead[] = [
-  { id: "l1", title: "Billable issue resolution + verified technical audit", accountId: "a4", stage: "Proposal", value: 40000, source: "Direct", owner: "Amar", nextAction: "Present deck + proposal, Wed 14 Oct 10:00 AM", due: "2026-10-14" },
-  { id: "l2", title: "Founder Launch Package + MicroCommerce", accountId: "a6", stage: "Won", value: 22500, source: "Direct", owner: "Amar", nextAction: "Receive inputs, start launch work", due: "2026-10-13" },
+  { id: "l1", title: "Billable issue resolution + verified technical audit", accountId: "a4", stage: "Proposal", value: 40000, source: "Direct", owner: "Amar", nextAction: "14 Oct, 11:00 AM — Teams presentation only; gather feedback/access/ownership. Vashi next week, time pending.", due: "2026-10-14" },
+  { id: "l2", title: "Founder Launch Package + MicroCommerce", accountId: "a6", stage: "Won", value: 22500, source: "Direct", owner: "Amar", nextAction: "14 Oct, after MaaOm Teams — proposal discussion; inputs, kickoff timing and visit pending. No start confirmed.", due: "2026-10-14" },
   { id: "l3", title: "Website — Advanced package", accountId: "a8", stage: "Proposal", value: 75000, source: "Direct", owner: "Amar", nextAction: "Proposal follow-up", due: "2026-10-12" },
   { id: "l4", title: "Ecommerce + local presence", accountId: "a7", stage: "Negotiation", value: 0, source: "Referral", partnerId: "c2", owner: "Amar", nextAction: "Record 12 Oct meeting outcome", due: "2026-10-12" },
   { id: "l5", title: "Social / digital communication (tentative)", accountId: "a5", stage: "Proposal", value: 0, source: "Referral", partnerId: "c3", owner: "Amar", nextAction: "Confirm interest / scope", due: "2026-10-20" },
   { id: "l6", title: "Tally / custom reporting", accountId: "a9", stage: "Discovery", value: 0, source: "Direct", owner: "Amar", nextAction: "Discovery follow-up", due: "2026-10-15" },
-  { id: "l7", title: "Fashion + Jewellery ecommerce", accountId: "a10", stage: "New", value: 0, source: "Direct", owner: "Amar", nextAction: "Discovery call", due: "2026-10-13" },
+  { id: "l7", title: "Fashion + Jewellery ecommerce", accountId: "a10", stage: "New", value: 0, source: "Direct", owner: "Amar", nextAction: "14 Oct, 11:00 AM — confirm evening discovery time; discuss fashion/jewellery ecommerce scope.", due: "2026-10-14" },
   { id: "l8", title: "Perfume ecommerce store", accountId: "a11", stage: "New", value: 0, source: "Direct", owner: "Amar", nextAction: "Discovery call", due: "2026-10-13" },
   { id: "l9", title: "Sports apparel ecommerce", accountId: "a12", stage: "New", value: 0, source: "Direct", owner: "Amar", nextAction: "Discovery call", due: "2026-10-13" },
   { id: "l10", title: "Qualification — requirement TBD", accountId: "a13", stage: "New", value: 0, source: "Direct", owner: "Amar", nextAction: "Qualify contact", due: "2026-10-13" },
+  { id: "l11", title: "One or two ecommerce stores + Autonoma campaign", accountId: "a14", stage: "Nurture", value: 0, source: "TBD", owner: "Amar", nextAction: "Keep warm; follow up around 27 Oct (~2 weeks). Requirement not immediate; scope pending.", due: "2026-10-27" },
 ];
 
 export const seedActivities: Activity[] = [
-  { id: "ac1", rank: 1, type: "meeting", subject: "MaaOm Vashi full-day visit — management presentation 10:00 AM", accountId: "a4", due: "2026-10-14", completed: false, owner: "Amar" },
-  { id: "ac2", rank: 2, type: "task", subject: "Receive Nikhil business/product inputs", accountId: "a6", due: "2026-10-13", completed: false, owner: "Amar" },
+  { id: "ac1", rank: 1, type: "meeting", subject: "MaaOm Teams — 11:00 AM, presentation only; current assessment + feedback/access/ownership", accountId: "a4", due: "2026-10-14", completed: false, owner: "Amar" },
+  { id: "ac2", rank: 2, type: "meeting", subject: "Nikhil — proposal discussion after MaaOm Teams; confirm inputs, kickoff timing and visit", accountId: "a6", due: "2026-10-14", completed: false, owner: "Amar" },
   { id: "ac3", rank: 3, type: "email", subject: "Await GreenThoughts payment confirmation / date (₹18,000)", accountId: "a3", due: "2026-10-12", completed: false, owner: "Amar" },
   { id: "ac4", rank: 4, type: "note", subject: "Record outcome of Lalita 12 Oct closing meeting", accountId: "a7", due: "2026-10-12", completed: false, owner: "Amar" },
   { id: "ac5", rank: 5, type: "call", subject: "Girish — website proposal follow-up", accountId: "a8", due: "2026-10-12", completed: false, owner: "Amar" },
-  { id: "ac6", rank: 6, type: "call", subject: "Qualify Rohan Duggal — fashion/jewellery stores", accountId: "a10", due: "2026-10-13", completed: false, owner: "Amar" },
+  { id: "ac6", rank: 6, type: "call", subject: "Rohan — 11:00 AM reminder/contact to confirm evening fashion/jewellery ecommerce discovery time", accountId: "a10", due: "2026-10-14", completed: false, owner: "Amar" },
   { id: "ac7", rank: 6, type: "call", subject: "Qualify Krishna Singh — perfume store", accountId: "a11", due: "2026-10-13", completed: false, owner: "Amar" },
   { id: "ac8", rank: 6, type: "call", subject: "Qualify Jaskaran Singh — GT Boys apparel", accountId: "a12", due: "2026-10-13", completed: false, owner: "Amar" },
   { id: "ac9", rank: 6, type: "call", subject: "Qualify Ashish Wadekar — verify business", accountId: "a13", due: "2026-10-13", completed: false, owner: "Amar" },
@@ -126,6 +131,8 @@ export const seedActivities: Activity[] = [
   { id: "ac11", rank: 8, type: "task", subject: "Flight Path — verify live site, handover, billing", accountId: "a1", due: "2026-10-16", completed: false, owner: "Amar" },
   { id: "ac12", rank: 8, type: "call", subject: "Trikaya — confirm current engagement", accountId: "a2", due: "2026-10-16", completed: false, owner: "Amar" },
   { id: "ac13", rank: 9, type: "email", subject: "Huvepharma — confirm interest / scope", accountId: "a5", due: "2026-10-20", completed: false, owner: "Amar" },
+  { id: "ac14", type: "meeting", subject: "Rohan — evening fashion/jewellery ecommerce discovery; exact time pending", accountId: "a10", due: "2026-10-14", completed: false, owner: "Amar" },
+  { id: "ac15", type: "call", subject: "Mansi — keep warm; ~2-week follow-up on ecommerce stores + Autonoma campaign scope", accountId: "a14", due: "2026-10-27", completed: false, owner: "Amar" },
   { id: "ac20", type: "proposal", subject: "Nikhil proposal accepted", accountId: "a6", due: "2026-10-12", completed: true, owner: "Amar" },
   { id: "ac21", type: "email", subject: "GreenThoughts payment follow-up sent to Mr Deshmukh", accountId: "a3", due: "2026-10-12", completed: true, owner: "Amar" },
   { id: "ac22", type: "proposal", subject: "MaaOm management presentation + commercial proposal prepared", accountId: "a4", due: "2026-10-12", completed: true, owner: "Amar" },
@@ -155,7 +162,7 @@ export const seedProjects: Project[] = [
   { id: "p1", accountId: "a1", name: "Website & content", status: "Delivered", deliverables: ["Site build", "Content", "SEO work", "Domain / ownership"] },
   { id: "p3", accountId: "a2", name: "Website & presentations", status: "Delivered", deliverables: ["Website", "Content", "Premium decks"] },
   { id: "p4", accountId: "a3", name: "Website", status: "Delivered", deliverables: ["Website build", "Invoice ₹18,000 (payment pending)"] },
-  { id: "p5", accountId: "a4", name: "Issue resolution & preliminary audit", status: "In Progress", deliverables: ["CIS access issue resolved (billable)", "Preliminary audit (9 Oct)", "Management presentation (14 Oct)"] },
-  { id: "p6", accountId: "a6", name: "Founder Launch + MicroCommerce", status: "In Progress", deliverables: ["Await inputs (13 Oct)", "Website", "MicroCommerce launch"] },
+  { id: "p5", accountId: "a4", name: "Issue resolution & preliminary audit", status: "In Progress", deliverables: ["CIS access issue resolved (billable)", "Preliminary audit (9 Oct)", "Teams presentation only (14 Oct, 11:00 AM): assessment + feedback/access/ownership", "Vashi visit next week — date/time pending"] },
+  { id: "p6", accountId: "a6", name: "Founder Launch + MicroCommerce", status: "Proposed", deliverables: ["Proposal discussion 14 Oct after MaaOm Teams", "Inputs, kickoff timing and visit confirmation pending", "Website / MicroCommerce launch — not started"] },
   { id: "p7", accountId: "a8", name: "Website proposal", status: "Proposed", deliverables: ["Proposal — Advanced ₹75,000"] },
 ];

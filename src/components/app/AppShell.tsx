@@ -37,7 +37,7 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
         ))}
       </nav>
       <div className="border-t border-sidebar-border p-3 text-[11px] text-sidebar-muted">
-        <div className="flex items-center gap-1.5"><ShieldAlert className="size-3.5" /> Operational snapshot • Updated 12 Oct 2026 • Backend sync pending</div>
+        <div className="flex items-center gap-1.5"><ShieldAlert className="size-3.5" /> Operational snapshot • Updated 13 Oct 2026 • Backend sync pending</div>
       </div>
     </div>
   );
