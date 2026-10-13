@@ -37,6 +37,7 @@ function Pipeline() {
                   <div key={l.id} className="panel p-2.5 text-[12px]">
                     <div className="font-medium leading-snug">{l.title}</div>
                     <Link to="/accounts/$id" params={{ id: l.accountId }} className="text-[11px] text-muted-foreground hover:text-primary">{byId(db.accounts, l.accountId)?.name}</Link>
+                    {["a4", "a6", "a10", "a14"].includes(l.accountId) && <p className="mt-1 text-[11px] leading-snug text-muted-foreground">{l.nextAction}</p>}
                     <div className="mt-1.5 flex justify-between"><span className="num font-semibold">{moneyShort(l.value)}</span><span className="text-[11px] text-muted-foreground">{relDay(l.due)}</span></div>
                     <select aria-label="Move stage" value={l.stage} className="mt-2 h-7 w-full rounded border bg-card px-1 text-[11px]"
                       onChange={(e) => { repo.moveLead(l.id, e.target.value as LeadStage); toast.success(`Moved to ${e.target.value}`); }}>
