@@ -71,6 +71,8 @@ export interface Activity {
   owner: string;
   /** Operational priority order (lower = more urgent). */
   rank?: number;
+  /** Operational bucket for Command Center Today/Next. */
+  category?: "payment" | "waiting" | "outreach" | "blocker";
 }
 
 export type CampaignChannel = "Google Ads" | "SEO" | "Social" | "Launch/Publicity" | "Re-engagement" | "Lead Generation" | "Meta Ads";
