@@ -13,7 +13,7 @@ import { SERVICE_COLUMNS } from "@/lib/constants";
 import { fmtDate, money } from "@/lib/format";
 import { nextBestServices } from "@/lib/insights";
 
-export const Route = createFileRoute("/accounts/$id")({
+export const Route = createFileRoute("/_authenticated/accounts/$id")({
   head: ({ params }) => {
     const name = seedAccounts.find((a) => a.id === params.id)?.name ?? "Account";
     return { meta: [

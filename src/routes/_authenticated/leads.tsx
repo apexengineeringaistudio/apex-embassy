@@ -10,7 +10,7 @@ import { money, relDay } from "@/lib/format";
 import { pageHead } from "@/lib/seo";
 import type { Lead } from "@/lib/types";
 
-export const Route = createFileRoute("/leads")({
+export const Route = createFileRoute("/_authenticated/leads")({
   head: pageHead("Leads", "Every open and closed sales opportunity."),
   component: Leads,
 });

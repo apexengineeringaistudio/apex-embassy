@@ -12,7 +12,7 @@ import { nextBestServices } from "@/lib/insights";
 import { pageHead } from "@/lib/seo";
 import { FileLink } from "@/components/app/ClientFiles";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: pageHead("Command Center", "Daily overview of accounts, pipeline, follow-ups and growth opportunities."),
   component: CommandCenter,
 });

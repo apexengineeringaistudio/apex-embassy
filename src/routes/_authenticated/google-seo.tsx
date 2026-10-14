@@ -6,7 +6,7 @@ import { ConnectionCard } from "@/components/app/ConnectionCard";
 import { CoverageCell } from "@/components/app/CoverageCell";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/google-seo")({
+export const Route = createFileRoute("/_authenticated/google-seo")({
   head: pageHead("Google & SEO", "Google Business Profile, GA4, Search Console and SEO readiness."),
   component: GoogleSeo,
 });

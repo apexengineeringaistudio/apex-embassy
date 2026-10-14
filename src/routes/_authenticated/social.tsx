@@ -8,7 +8,7 @@ import { CampaignCard } from "@/components/app/CampaignCard";
 import { PACKAGES } from "@/lib/constants";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/social")({
+export const Route = createFileRoute("/_authenticated/social")({
   head: pageHead("Social Media", "Social content calendar and packages."),
   component: Social,
 });

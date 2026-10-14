@@ -7,7 +7,7 @@ import { CoverageCell, CoverageLegend } from "@/components/app/CoverageCell";
 import { PACKAGES, SERVICE_CATALOG, SERVICE_COLUMNS } from "@/lib/constants";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/_authenticated/services")({
   head: pageHead("Service Coverage", "Service catalog, packages and cross-sell coverage heatmap."),
   component: Services,
 });
