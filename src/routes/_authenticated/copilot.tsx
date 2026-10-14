@@ -10,7 +10,7 @@ import { Pill } from "@/components/app/bits";
 import { askCopilot, SUGGESTIONS, type CopilotAction, type CopilotReply } from "@/services/copilot";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/copilot")({
+export const Route = createFileRoute("/_authenticated/copilot")({
   validateSearch: (s: Record<string, unknown>): { q?: string } => (typeof s["q"] === "string" ? { q: s["q"] } : {}),
   head: pageHead("Apex Copilot", "Internal AI copilot for follow-ups, pitches and drafts."),
   component: Copilot,

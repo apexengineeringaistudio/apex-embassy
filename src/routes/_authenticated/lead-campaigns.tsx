@@ -12,7 +12,7 @@ import { EmptyState, PageHeader, Pill } from "@/components/app/bits";
 import { pageHead } from "@/lib/seo";
 import type { LeadCampaign } from "@/lib/types";
 
-export const Route = createFileRoute("/lead-campaigns")({
+export const Route = createFileRoute("/_authenticated/lead-campaigns")({
   head: pageHead("Lead Campaigns", "Lead-finding campaigns with sources and qualification."),
   component: LeadCampaigns,
 });

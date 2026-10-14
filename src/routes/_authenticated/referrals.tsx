@@ -4,7 +4,7 @@ import { Avatar, Kpi, PageHeader, Panel, Pill } from "@/components/app/bits";
 import { money } from "@/lib/format";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/referrals")({
+export const Route = createFileRoute("/_authenticated/referrals")({
   head: pageHead("Referral Partners", "Partner introductions, wins and attribution."),
   component: Referrals,
 });

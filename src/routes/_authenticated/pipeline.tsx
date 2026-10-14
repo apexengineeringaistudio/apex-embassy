@@ -10,7 +10,7 @@ import { moneyShort, relDay } from "@/lib/format";
 import { pageHead } from "@/lib/seo";
 import type { LeadStage } from "@/lib/types";
 
-export const Route = createFileRoute("/pipeline")({
+export const Route = createFileRoute("/_authenticated/pipeline")({
   head: pageHead("Pipeline", "Kanban board of opportunities by stage."),
   component: Pipeline,
 });

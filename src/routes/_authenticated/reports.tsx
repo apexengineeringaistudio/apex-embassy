@@ -8,7 +8,7 @@ import { PageHeader, Panel } from "@/components/app/bits";
 import { LEAD_STAGES, SERVICE_COLUMNS } from "@/lib/constants";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/reports")({
+export const Route = createFileRoute("/_authenticated/reports")({
   head: pageHead("Reports", "Pipeline, source attribution and coverage reporting."),
   component: Reports,
 });

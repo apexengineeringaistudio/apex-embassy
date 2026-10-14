@@ -8,7 +8,7 @@ import { Avatar, PageHeader, Pill } from "@/components/app/bits";
 import { pageHead } from "@/lib/seo";
 import type { Contact } from "@/lib/types";
 
-export const Route = createFileRoute("/contacts")({
+export const Route = createFileRoute("/_authenticated/contacts")({
   head: pageHead("Contacts", "People linked to accounts and referral partners."),
   component: Contacts,
 });

@@ -9,7 +9,7 @@ import { money } from "@/lib/format";
 import { pageHead } from "@/lib/seo";
 import type { Campaign } from "@/lib/types";
 
-export const Route = createFileRoute("/ads")({
+export const Route = createFileRoute("/_authenticated/ads")({
   head: pageHead("Ads", "Google and Meta ad campaign planning."),
   component: Ads,
 });

@@ -4,7 +4,7 @@ import { DemoBanner, PageHeader, Panel } from "@/components/app/bits";
 import { ConnectionCard } from "@/components/app/ConnectionCard";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/connections")({
+export const Route = createFileRoute("/_authenticated/connections")({
   head: pageHead("Connections", "Planned integrations: Gmail, Google Workspace, Google marketing tools and GitHub."),
   component: Connections,
 });

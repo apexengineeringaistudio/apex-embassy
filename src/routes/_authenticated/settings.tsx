@@ -10,7 +10,7 @@ import { PageHeader, Panel, Pill } from "@/components/app/bits";
 import { LEAD_STAGES, SERVICE_CATALOG } from "@/lib/constants";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/settings")({
+export const Route = createFileRoute("/_authenticated/settings")({
   head: pageHead("Settings", "Users, business profile, catalog, stages and notifications."),
   component: Settings,
 });

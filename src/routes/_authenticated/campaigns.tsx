@@ -8,7 +8,7 @@ import { CampaignCard } from "@/components/app/CampaignCard";
 import { useQuickCreate } from "@/components/app/QuickCreate";
 import { pageHead } from "@/lib/seo";
 
-export const Route = createFileRoute("/campaigns")({
+export const Route = createFileRoute("/_authenticated/campaigns")({
   head: pageHead("Campaigns", "Draft and planned marketing campaigns across channels."),
   component: Campaigns,
 });

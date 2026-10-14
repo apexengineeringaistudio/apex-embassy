@@ -1,10 +1,12 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, Plus, Search, Command, ShieldAlert } from "lucide-react";
+import { Menu, Plus, Search, Command, ShieldAlert, Database, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { useRepoStatus } from "@/data/repository";
 import { NAV } from "./nav";
 import { CommandPalette } from "./CommandPalette";
 import { QuickCreateProvider, useQuickCreate } from "./QuickCreate";
@@ -37,13 +39,21 @@ function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
         ))}
       </nav>
       <div className="border-t border-sidebar-border p-3 text-[11px] text-sidebar-muted">
-        <div className="flex items-center gap-1.5"><ShieldAlert className="size-3.5" /> Operational snapshot • Updated 13 Oct 2026 • Backend sync pending</div>
+        <DataStatus />
       </div>
     </div>
   );
 }
 
-function TopBar({ onMenu, onSearch }: { onMenu: () => void; onSearch: () => void }) {
+function DataStatus() {
+  const st = useRepoStatus();
+  if (st.source === "database") return <div className="flex items-center gap-1.5"><Database className="size-3.5 text-success" /> Live database • saved edits persist</div>;
+  if (st.source === "loading") return <div className="flex items-center gap-1.5"><Database className="size-3.5" /> Connecting to database…</div>;
+  if (st.source === "error") return <div className="flex items-center gap-1.5 text-destructive"><ShieldAlert className="size-3.5" /> Database unavailable — showing snapshot (edits not saved)</div>;
+  return <div className="flex items-center gap-1.5"><ShieldAlert className="size-3.5" /> Operational snapshot • not yet synced</div>;
+}
+
+function TopBar({ onMenu, onSearch, userEmail }: { onMenu: () => void; onSearch: () => void; userEmail: string }) {
   const create = useQuickCreate();
   return (
     <header className="sticky top-0 z-20 flex h-14 items-center gap-2 border-b bg-card/95 px-3 backdrop-blur md:px-5">
@@ -63,13 +73,19 @@ function TopBar({ onMenu, onSearch }: { onMenu: () => void; onSearch: () => void
             <DropdownMenuItem onSelect={() => create("campaign")}>New campaign</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <span className="flex size-8 items-center justify-center rounded-full bg-secondary text-xs font-semibold">AP</span>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild><button aria-label="Account menu" className="flex size-8 items-center justify-center rounded-full bg-secondary text-xs font-semibold uppercase">{userEmail.slice(0, 2) || "AP"}</button></DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <div className="px-2 py-1.5 text-[12px] text-muted-foreground">{userEmail}</div>
+            <DropdownMenuItem onSelect={() => supabase.auth.signOut()}><LogOut /> Sign out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
 }
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, userEmail = "" }: { children: ReactNode; userEmail?: string }) {
   const [mobile, setMobile] = useState(false);
   const [cmd, setCmd] = useState(false);
   useEffect(() => {
@@ -88,7 +104,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </SheetContent>
         </Sheet>
         <div className="flex min-w-0 flex-1 flex-col">
-          <TopBar onMenu={() => setMobile(true)} onSearch={() => setCmd(true)} />
+          <TopBar onMenu={() => setMobile(true)} onSearch={() => setCmd(true)} userEmail={userEmail} />
           <main className="flex-1 p-3 md:p-5">{children}</main>
         </div>
       </div>

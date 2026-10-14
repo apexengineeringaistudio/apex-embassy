@@ -9,7 +9,7 @@ import { fmtDate, money } from "@/lib/format";
 import { pageHead } from "@/lib/seo";
 import type { Account } from "@/lib/types";
 
-export const Route = createFileRoute("/accounts/")({
+export const Route = createFileRoute("/_authenticated/accounts/")({
   head: pageHead("Accounts", "All client, prospect and partner accounts."),
   component: Accounts,
 });
