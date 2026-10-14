@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedAdsRouteImport } from './routes/_authenticated/ads'
 import { Route as AuthenticatedCampaignsRouteImport } from './routes/_authenticated/campaigns'
@@ -30,111 +32,122 @@ import { Route as AuthenticatedTasksRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedAccountsIndexRouteImport } from './routes/_authenticated/accounts.index'
 import { Route as AuthenticatedAccountsIdRouteImport } from './routes/_authenticated/accounts.$id'
 
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
-  id: '/_authenticated/',
-  path: '/',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAdsRoute = AuthenticatedAdsRouteImport.update({
-  id: '/_authenticated/ads',
+  id: '/ads',
   path: '/ads',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCampaignsRoute = AuthenticatedCampaignsRouteImport.update({
-  id: '/_authenticated/campaigns',
+  id: '/campaigns',
   path: '/campaigns',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedConnectionsRoute =
   AuthenticatedConnectionsRouteImport.update({
-    id: '/_authenticated/connections',
+    id: '/connections',
     path: '/connections',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedContactsRoute = AuthenticatedContactsRouteImport.update({
-  id: '/_authenticated/contacts',
+  id: '/contacts',
   path: '/contacts',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCopilotRoute = AuthenticatedCopilotRouteImport.update({
-  id: '/_authenticated/copilot',
+  id: '/copilot',
   path: '/copilot',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedFollowUpsRoute = AuthenticatedFollowUpsRouteImport.update({
-  id: '/_authenticated/follow-ups',
+  id: '/follow-ups',
   path: '/follow-ups',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedGoogleSeoRoute = AuthenticatedGoogleSeoRouteImport.update({
-  id: '/_authenticated/google-seo',
+  id: '/google-seo',
   path: '/google-seo',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedLeadCampaignsRoute =
   AuthenticatedLeadCampaignsRouteImport.update({
-    id: '/_authenticated/lead-campaigns',
+    id: '/lead-campaigns',
     path: '/lead-campaigns',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedLeadsRoute = AuthenticatedLeadsRouteImport.update({
-  id: '/_authenticated/leads',
+  id: '/leads',
   path: '/leads',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedMeetingsRoute = AuthenticatedMeetingsRouteImport.update({
-  id: '/_authenticated/meetings',
+  id: '/meetings',
   path: '/meetings',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPipelineRoute = AuthenticatedPipelineRouteImport.update({
-  id: '/_authenticated/pipeline',
+  id: '/pipeline',
   path: '/pipeline',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedReferralsRoute = AuthenticatedReferralsRouteImport.update({
-  id: '/_authenticated/referrals',
+  id: '/referrals',
   path: '/referrals',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedReportsRoute = AuthenticatedReportsRouteImport.update({
-  id: '/_authenticated/reports',
+  id: '/reports',
   path: '/reports',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedServicesRoute = AuthenticatedServicesRouteImport.update({
-  id: '/_authenticated/services',
+  id: '/services',
   path: '/services',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/_authenticated/settings',
+  id: '/settings',
   path: '/settings',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedSocialRoute = AuthenticatedSocialRouteImport.update({
-  id: '/_authenticated/social',
+  id: '/social',
   path: '/social',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTasksRoute = AuthenticatedTasksRouteImport.update({
-  id: '/_authenticated/tasks',
+  id: '/tasks',
   path: '/tasks',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAccountsIndexRoute =
   AuthenticatedAccountsIndexRouteImport.update({
-    id: '/_authenticated/accounts/',
+    id: '/accounts/',
     path: '/accounts/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAccountsIdRoute = AuthenticatedAccountsIdRouteImport.update({
-  id: '/_authenticated/accounts/$id',
+  id: '/accounts/$id',
   path: '/accounts/$id',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
   '/ads': typeof AuthenticatedAdsRoute
   '/campaigns': typeof AuthenticatedCampaignsRoute
   '/connections': typeof AuthenticatedConnectionsRoute
@@ -152,11 +165,11 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRoute
   '/social': typeof AuthenticatedSocialRoute
   '/tasks': typeof AuthenticatedTasksRoute
-  '/': typeof AuthenticatedIndexRoute
   '/accounts/$id': typeof AuthenticatedAccountsIdRoute
   '/accounts/': typeof AuthenticatedAccountsIndexRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
   '/ads': typeof AuthenticatedAdsRoute
   '/campaigns': typeof AuthenticatedCampaignsRoute
   '/connections': typeof AuthenticatedConnectionsRoute
@@ -180,6 +193,8 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/_authenticated/ads': typeof AuthenticatedAdsRoute
   '/_authenticated/campaigns': typeof AuthenticatedCampaignsRoute
   '/_authenticated/connections': typeof AuthenticatedConnectionsRoute
@@ -204,6 +219,8 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
+    | '/auth'
     | '/ads'
     | '/campaigns'
     | '/connections'
@@ -221,11 +238,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/social'
     | '/tasks'
-    | '/'
     | '/accounts/$id'
     | '/accounts/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/auth'
     | '/ads'
     | '/campaigns'
     | '/connections'
@@ -248,6 +265,8 @@ export interface FileRouteTypes {
     | '/accounts'
   id:
     | '__root__'
+    | '/_authenticated'
+    | '/auth'
     | '/_authenticated/ads'
     | '/_authenticated/campaigns'
     | '/_authenticated/connections'
@@ -271,6 +290,170 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ads': {
+      id: '/_authenticated/ads'
+      path: '/ads'
+      fullPath: '/ads'
+      preLoaderRoute: typeof AuthenticatedAdsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/campaigns': {
+      id: '/_authenticated/campaigns'
+      path: '/campaigns'
+      fullPath: '/campaigns'
+      preLoaderRoute: typeof AuthenticatedCampaignsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/connections': {
+      id: '/_authenticated/connections'
+      path: '/connections'
+      fullPath: '/connections'
+      preLoaderRoute: typeof AuthenticatedConnectionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/contacts': {
+      id: '/_authenticated/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof AuthenticatedContactsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/copilot': {
+      id: '/_authenticated/copilot'
+      path: '/copilot'
+      fullPath: '/copilot'
+      preLoaderRoute: typeof AuthenticatedCopilotRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/follow-ups': {
+      id: '/_authenticated/follow-ups'
+      path: '/follow-ups'
+      fullPath: '/follow-ups'
+      preLoaderRoute: typeof AuthenticatedFollowUpsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/google-seo': {
+      id: '/_authenticated/google-seo'
+      path: '/google-seo'
+      fullPath: '/google-seo'
+      preLoaderRoute: typeof AuthenticatedGoogleSeoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/lead-campaigns': {
+      id: '/_authenticated/lead-campaigns'
+      path: '/lead-campaigns'
+      fullPath: '/lead-campaigns'
+      preLoaderRoute: typeof AuthenticatedLeadCampaignsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/leads': {
+      id: '/_authenticated/leads'
+      path: '/leads'
+      fullPath: '/leads'
+      preLoaderRoute: typeof AuthenticatedLeadsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/meetings': {
+      id: '/_authenticated/meetings'
+      path: '/meetings'
+      fullPath: '/meetings'
+      preLoaderRoute: typeof AuthenticatedMeetingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/pipeline': {
+      id: '/_authenticated/pipeline'
+      path: '/pipeline'
+      fullPath: '/pipeline'
+      preLoaderRoute: typeof AuthenticatedPipelineRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/referrals': {
+      id: '/_authenticated/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof AuthenticatedReferralsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/reports': {
+      id: '/_authenticated/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/services': {
+      id: '/_authenticated/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof AuthenticatedServicesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/social': {
+      id: '/_authenticated/social'
+      path: '/social'
+      fullPath: '/social'
+      preLoaderRoute: typeof AuthenticatedSocialRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tasks': {
+      id: '/_authenticated/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof AuthenticatedTasksRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/accounts/': {
+      id: '/_authenticated/accounts/'
+      path: '/accounts'
+      fullPath: '/accounts/'
+      preLoaderRoute: typeof AuthenticatedAccountsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/accounts/$id': {
+      id: '/_authenticated/accounts/$id'
+      path: '/accounts/$id'
+      fullPath: '/accounts/$id'
+      preLoaderRoute: typeof AuthenticatedAccountsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+  }
+}
+
+interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdsRoute: typeof AuthenticatedAdsRoute
   AuthenticatedCampaignsRoute: typeof AuthenticatedCampaignsRoute
   AuthenticatedConnectionsRoute: typeof AuthenticatedConnectionsRoute
@@ -293,152 +476,7 @@ export interface RootRouteChildren {
   AuthenticatedAccountsIndexRoute: typeof AuthenticatedAccountsIndexRoute
 }
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/_authenticated/': {
-      id: '/_authenticated/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/ads': {
-      id: '/_authenticated/ads'
-      path: '/ads'
-      fullPath: '/ads'
-      preLoaderRoute: typeof AuthenticatedAdsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/campaigns': {
-      id: '/_authenticated/campaigns'
-      path: '/campaigns'
-      fullPath: '/campaigns'
-      preLoaderRoute: typeof AuthenticatedCampaignsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/connections': {
-      id: '/_authenticated/connections'
-      path: '/connections'
-      fullPath: '/connections'
-      preLoaderRoute: typeof AuthenticatedConnectionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/contacts': {
-      id: '/_authenticated/contacts'
-      path: '/contacts'
-      fullPath: '/contacts'
-      preLoaderRoute: typeof AuthenticatedContactsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/copilot': {
-      id: '/_authenticated/copilot'
-      path: '/copilot'
-      fullPath: '/copilot'
-      preLoaderRoute: typeof AuthenticatedCopilotRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/follow-ups': {
-      id: '/_authenticated/follow-ups'
-      path: '/follow-ups'
-      fullPath: '/follow-ups'
-      preLoaderRoute: typeof AuthenticatedFollowUpsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/google-seo': {
-      id: '/_authenticated/google-seo'
-      path: '/google-seo'
-      fullPath: '/google-seo'
-      preLoaderRoute: typeof AuthenticatedGoogleSeoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/lead-campaigns': {
-      id: '/_authenticated/lead-campaigns'
-      path: '/lead-campaigns'
-      fullPath: '/lead-campaigns'
-      preLoaderRoute: typeof AuthenticatedLeadCampaignsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/leads': {
-      id: '/_authenticated/leads'
-      path: '/leads'
-      fullPath: '/leads'
-      preLoaderRoute: typeof AuthenticatedLeadsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/meetings': {
-      id: '/_authenticated/meetings'
-      path: '/meetings'
-      fullPath: '/meetings'
-      preLoaderRoute: typeof AuthenticatedMeetingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/pipeline': {
-      id: '/_authenticated/pipeline'
-      path: '/pipeline'
-      fullPath: '/pipeline'
-      preLoaderRoute: typeof AuthenticatedPipelineRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/referrals': {
-      id: '/_authenticated/referrals'
-      path: '/referrals'
-      fullPath: '/referrals'
-      preLoaderRoute: typeof AuthenticatedReferralsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/reports': {
-      id: '/_authenticated/reports'
-      path: '/reports'
-      fullPath: '/reports'
-      preLoaderRoute: typeof AuthenticatedReportsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/services': {
-      id: '/_authenticated/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof AuthenticatedServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/social': {
-      id: '/_authenticated/social'
-      path: '/social'
-      fullPath: '/social'
-      preLoaderRoute: typeof AuthenticatedSocialRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/tasks': {
-      id: '/_authenticated/tasks'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof AuthenticatedTasksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/accounts/': {
-      id: '/_authenticated/accounts/'
-      path: '/accounts'
-      fullPath: '/accounts/'
-      preLoaderRoute: typeof AuthenticatedAccountsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/accounts/$id': {
-      id: '/_authenticated/accounts/$id'
-      path: '/accounts/$id'
-      fullPath: '/accounts/$id'
-      preLoaderRoute: typeof AuthenticatedAccountsIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
-}
-
-const rootRouteChildren: RootRouteChildren = {
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdsRoute: AuthenticatedAdsRoute,
   AuthenticatedCampaignsRoute: AuthenticatedCampaignsRoute,
   AuthenticatedConnectionsRoute: AuthenticatedConnectionsRoute,
@@ -459,6 +497,14 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAccountsIdRoute: AuthenticatedAccountsIdRoute,
   AuthenticatedAccountsIndexRoute: AuthenticatedAccountsIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
