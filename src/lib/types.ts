@@ -110,4 +110,14 @@ export interface Project {
   name: string;
   status: "In Progress" | "Delivered" | "On Hold" | "Proposed";
   deliverables: string[];
+  /** Delivery tracker fields — all optional; never fabricated. */
+  priority?: Priority;
+  /** Manually entered progress 0–100; undefined = not assessed. */
+  progress?: number;
+  nextAction?: string;
+  devUrl?: string;
+  liveUrl?: string;
+  notes?: string;
+  milestones?: { id: string; label: string; done: boolean }[];
+  updatedAt?: string;
 }

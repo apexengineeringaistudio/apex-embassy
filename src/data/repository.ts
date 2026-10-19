@@ -44,11 +44,13 @@ const set = (patch: Partial<DB>) => { db = { ...db, ...patch }; emit(); };
 const setStatus = (s: RepoStatus) => { status = s; emit(); };
 const uid = (p: string) => `${p}${Math.random().toString(36).slice(2, 8)}`;
 
+// All core tables share the same {id, data} shape; narrow to one for typing.
+const tbl = (k: Key) => supabase.from(TABLES[k] as "accounts");
 const toRows = (list: { id: string }[]) => list.map((r) => ({ id: r.id, data: JSON.parse(JSON.stringify(r)) as Json }));
 
 async function persist<K extends Key>(key: K, rows: { id: string }[]) {
   if (status.source !== "database") return;
-  const { error } = await supabase.from(TABLES[key]).upsert(toRows(rows));
+  const { error } = await tbl(key).upsert(toRows(rows));
   if (error) {
     const { toast } = await import("sonner");
     toast.error("Not saved to database", { description: error.message });
@@ -70,20 +72,20 @@ export const repo = {
     loading = (async () => {
       try {
         const keys = Object.keys(TABLES) as Key[];
-        const results = await Promise.all(keys.map((k) => supabase.from(TABLES[k]).select("data")));
+        const results = await Promise.all(keys.map((k) => tbl(k).select("data")));
         const err = results.find((r) => r.error)?.error;
         if (err) throw err;
         let imported = false;
-        if ((results[0].data ?? []).length === 0) {
+        if ((results[0]?.data ?? []).length === 0) {
           for (const k of keys) {
-            const { error } = await supabase.from(TABLES[k]).upsert(toRows(seed[k]), { onConflict: "id", ignoreDuplicates: true });
+            const { error } = await tbl(k).upsert(toRows(seed[k]), { onConflict: "id", ignoreDuplicates: true });
             if (error) throw error;
           }
           imported = true;
           db = seed;
         } else {
           const next = {} as Record<Key, unknown[]>;
-          keys.forEach((k, i) => { next[k] = (results[i].data ?? []).map((r) => r.data); });
+          keys.forEach((k, i) => { next[k] = (results[i]?.data ?? []).map((r) => r.data); });
           db = next as unknown as DB;
         }
         setStatus({ source: "database", loadedAt: new Date().toISOString(), imported });
@@ -110,6 +112,14 @@ export const repo = {
     void persist("activities", db.activities.filter((a) => a.id === id));
   },
   addCampaign: (c: Omit<Campaign, "id">) => { const r = { ...c, id: uid("cp") }; set({ campaigns: [r, ...db.campaigns] }); void persist("campaigns", [r]); return r; },
+  /** Create or update a project (delivery tracker). Returns the saved record. */
+  saveProject: (p: Omit<Project, "id"> & { id?: string }) => {
+    const r: Project = { ...p, id: p.id ?? uid("p"), updatedAt: new Date().toISOString() } as Project;
+    const exists = db.projects.some((x) => x.id === r.id);
+    set({ projects: exists ? db.projects.map((x) => (x.id === r.id ? r : x)) : [r, ...db.projects] });
+    void persist("projects", [r]);
+    return r;
+  },
   addLeadCampaign: (c: Omit<LeadCampaign, "id">) => { const r = { ...c, id: uid("lc") }; set({ leadCampaigns: [r, ...db.leadCampaigns] }); void persist("leadCampaigns", [r]); return r; },
 };
 
