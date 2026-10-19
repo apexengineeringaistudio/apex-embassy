@@ -1,6 +1,6 @@
 import {
   LayoutDashboard, Building2, Users, Target, KanbanSquare, PhoneCall, CalendarDays, ListTodo,
-  Grid3x3, Megaphone, Search, BadgeDollarSign, Share2, Radar, Handshake, Bot, BarChart3, Plug, Settings,
+  Grid3x3, Megaphone, Search, BadgeDollarSign, Share2, Radar, Handshake, Bot, BarChart3, Plug, Settings, FolderKanban,
   type LucideIcon,
 } from "lucide-react";
 
@@ -14,6 +14,7 @@ export const NAV: NavGroup[] = [
     { to: "/contacts", label: "Contacts", icon: Users },
     { to: "/leads", label: "Leads", icon: Target },
     { to: "/pipeline", label: "Pipeline", icon: KanbanSquare },
+    { to: "/projects", label: "Projects", icon: FolderKanban },
   ] },
   { label: "Activities", items: [
     { to: "/follow-ups", label: "Follow-ups", icon: PhoneCall },
