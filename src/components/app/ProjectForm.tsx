@@ -33,11 +33,11 @@ export function ProjectForm({ open, onOpenChange, project, onSaved }: {
   const up = (k: keyof typeof f) => (e: { target: { value: string } }) => setF((s) => ({ ...s, [k]: e.target.value }));
 
   const submit = () => {
-    const e: Record<string, string> = {};
-    if (!f.name.trim()) e.name = "Project name is required";
-    if (!isValidUrl(f.devUrl)) e.devUrl = "Enter a full URL starting with https://";
-    if (!isValidUrl(f.liveUrl)) e.liveUrl = "Enter a full URL starting with https://";
-    if (f.progress.trim() && !Number.isFinite(Number(f.progress))) e.progress = "Enter a number 0–100";
+    const e: { [k: string]: string } = {};
+    if (!f.name.trim()) e["name"] = "Project name is required";
+    if (!isValidUrl(f.devUrl)) e["devUrl"] = "Enter a full URL starting with https://";
+    if (!isValidUrl(f.liveUrl)) e["liveUrl"] = "Enter a full URL starting with https://";
+    if (f.progress.trim() && !Number.isFinite(Number(f.progress))) e["progress"] = "Enter a number 0–100";
     setErr(e);
     if (Object.keys(e).length) return;
     const saved = repo.saveProject({

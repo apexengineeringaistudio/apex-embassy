@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { isValidUrl } from "@/lib/projects";
 
-export function SafeLink({ url, label }: { url?: string; label?: string }) {
+export function SafeLink({ url, label }: { url?: string | undefined; label?: string }) {
   if (!url) return <span className="text-muted-foreground">—</span>;
   if (!isValidUrl(url)) return <span className="text-destructive">Invalid URL</span>;
   return (
@@ -11,7 +11,7 @@ export function SafeLink({ url, label }: { url?: string; label?: string }) {
   );
 }
 
-export function ProgressCell({ value }: { value?: number }) {
+export function ProgressCell({ value }: { value?: number | undefined }) {
   if (value == null) return <span className="text-[12px] text-muted-foreground">Not assessed</span>;
   return (
     <div className="flex items-center gap-2">
